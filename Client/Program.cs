@@ -1,10 +1,13 @@
-﻿namespace Client
+﻿using Client.Model;
+using System.Net.Http.Json;
+
+namespace Client
 {
     public class Program
     {
         static async Task Main(string[] args)
         {
-            HttpResponseMessage res;
+            HttpResponseMessage response;
             HttpClient client = new() { BaseAddress = new Uri("http://localhost:8080") };
 
             Console.WriteLine("Welcome! Choose one option (Number only):");
@@ -17,20 +20,25 @@
                 option = Console.ReadLine();
             }
 
-
             switch(option)
             {
                 case "1":
                    //res = await client.PostAsync("post/product");
                     break;
                 case "2":
-                    res = await client.GetAsync("get/products");
+                    var content = await client.GetFromJsonAsync<List<ProductModel>>("products");
+                    Console.Clear();
+                    Console.WriteLine("--- Products ---");
+                    foreach (var c in content)
+                    {
+                        Console.WriteLine($"\nProduct: {c.Product}, Price: {c.Price}");
+                    }
                     break;
                 case "3":
                     //res = await client.PutAsync("put/product");
                     break;
                 case "4":
-                    res = await client.DeleteAsync("delete/product");
+                    //res = await client.DeleteAsync("product");
                     break;
             }
         }
