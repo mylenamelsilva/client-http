@@ -23,7 +23,15 @@ namespace Client
             switch(option)
             {
                 case "1":
-                   //res = await client.PostAsync("post/product");
+
+
+                    ProductParams product = new();
+                    Console.WriteLine("Product name: ");
+                    product.Product = Console.ReadLine();
+                    Console.WriteLine("Product price: ");
+                    product.Price = Convert.ToInt32(Console.ReadLine());
+
+                    response = await client.PostAsJsonAsync("product", product);
                     break;
                 case "2":
                     var content = await client.GetFromJsonAsync<List<ProductModel>>("products");
