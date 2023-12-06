@@ -9,7 +9,7 @@ namespace Client
         {
             HttpResponseMessage result;
             HttpClient client = new() { BaseAddress = new Uri("http://localhost:8080") };
-
+            
             bool running = true;
             Console.WriteLine("Welcome! Choose one option (Number only):");
             while (running)
@@ -27,27 +27,36 @@ namespace Client
                 {
                     case "1":
                         ProductParams product = new();
-                        Console.WriteLine("Product name: ");
+                        Console.Write("\nProduct name: ");
                         product.Product = Console.ReadLine();
-                        Console.WriteLine("Product price: ");
-                        product.Price = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("Product price: ");
+                        product.Price = Convert.ToDouble(Console.ReadLine());
 
                         result = await client.PostAsJsonAsync("product", product);
                         var response = await result.Content.ReadAsStringAsync();
-                        Console.WriteLine(response == "True" ? "Created product" : "Error");
+                        Console.WriteLine(response == "True" ? "\nCreated product" : "\nError");
 
                         break;
                     case "2":
                         var content = await client.GetFromJsonAsync<List<ProductModel>>("products");
                         Console.Clear();
-                        Console.WriteLine("--- Products ---");
+                        Console.WriteLine("\n--- Products ---");
                         foreach (var c in content)
                         {
-                            Console.WriteLine($"\nProduct: {c.Product}, Price: {c.Price}");
+                            Console.WriteLine($"\nID: {c.Id}, Product: {c.Product}, Price: {c.Price}");
                         }
                         break;
                     case "3":
-                        //res = await client.PutAsync("put/product");
+                        ProductModel obj = new();
+                        Console.Write("\nProduct id: ");
+                        obj.Id = Console.ReadLine();
+                        Console.Write("Product name: ");
+                        obj.Product = Console.ReadLine();
+                        Console.Write("Product price: ");
+                        obj.Price = Convert.ToInt32(Console.ReadLine());
+                        result = await client.PutAsJsonAsync("product", obj);
+                        response = await result.Content.ReadAsStringAsync();
+                        Console.WriteLine(response == "True" ? "\nChanged product" : "\nError");
                         break;
                     case "4":
                         //res = await client.DeleteAsync("product");
