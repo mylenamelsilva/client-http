@@ -59,7 +59,11 @@ namespace Client
                         Console.WriteLine(response == "True" ? "\nChanged product" : "\nError");
                         break;
                     case "4":
-                        //res = await client.DeleteAsync("product");
+                        Console.Write("\nProduct id: ");
+                        string id = Console.ReadLine();
+                        result = await client.DeleteAsync($"product/{id}");
+                        response = await result.Content.ReadAsStringAsync();
+                        Console.WriteLine(response == "True" ? "\nDeleted product" : "\nError");
                         break;
                     case "5":
                         Console.WriteLine("\nExiting the program.");
