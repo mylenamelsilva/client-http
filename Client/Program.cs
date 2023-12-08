@@ -11,6 +11,7 @@ namespace Client
             HttpClient client = new() { BaseAddress = new Uri("http://localhost:8080") };
             
             bool running = true;
+            Console.Clear();
             Console.WriteLine("Welcome! Choose one option (Number only):");
             while (running)
             {
