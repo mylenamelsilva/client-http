@@ -34,7 +34,7 @@
 
 ## Como rodar
 
-* `git clone` para fazer uma cópia do repositório (Faça o clone do repositório do client para rodar em conjunto: [Client HTTP](https://github.com/mylenamelsilva/client-http))
+* `git clone` para fazer uma cópia do repositório (Faça o clone do repositório do server para rodar em conjunto: [Server HTTP](https://github.com/mylenamelsilva/server-http))
 * Abra o terminal dentro da pasta da aplicação
 * `dotnet run Client` para iniciar a aplicação e fazer requisições.
 * **Observação:** Para fazer a alteração e exclusão de um produto, é necessário ter o id, então liste os produtos antes para saber qual id do respectivo produto
